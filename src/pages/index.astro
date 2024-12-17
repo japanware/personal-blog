@@ -1,13 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
 ---
 
 <Layout>
-	<div class="text-center">
-		<pre class="flex justify-center text-center leading-none">
+	<div class="mb-12 mt-32 text-center">
+		<pre class="flex justify-center text-center leading-none overflow-hidden text-nowrap">
  ▐▄▄▄ ▄▄▄·  ▄▄▄· ▄▄▄·  ▐ ▄ ▄▄▌ ▐ ▄▌ ▄▄▄· ▄▄▄  ▄▄▄ .
   ·██▐█ ▀█ ▐█ ▄█▐█ ▀█ •█▌▐███· █▌▐█▐█ ▀█ ▀▄ █·▀▄.▀·
 ▪▄ ██▄█▀▀█  ██▀·▄█▀▀█ ▐█▐▐▌██▪▐█▐▐▌▄█▀▀█ ▐▀▀▄ ▐▀▀▪▄
@@ -15,18 +13,37 @@ import Layout from '../layouts/Layout.astro';
  ▀▀▀• ▀  ▀ .▀    ▀  ▀ ▀▀ █▪ ▀▀▀▀ ▀▪ ▀  ▀ .▀  ▀ ▀▀▀
 		</pre>
 		<p class="mb-12">C/++ Crackhead</p>
-		<div class="flex flex-col max-w-96 m-auto items-center border-4 border-double p-2 mb-12 border-[#cdd6f4]">
+		<div class="flex flex-col max-w-[32rem] m-auto items-center border-4 border-double p-2 mb-12 border-[#cdd6f4]">
 			<h5 class="flex justify-between">Latest Posts:</h5>
-			<ul>
-				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer">001 - Hello World</a></li>
+			<ul class="w-full">
+				{allPosts.map((post: any) =>
+					<li class="flex w-full items-center">
+						<a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer overflow-hidden text-nowrap" href={post.url}>
+							{post.frontmatter.title}
+						</a>
+						<span class="dots overflow-hidden text-nowrap flex-grow"></span>
+						<p class="flex">{post.frontmatter.author}</p>
+					</li>
+				)}
 			</ul>
 		</div>
 		<div class="flex flex-col max-w-96 m-auto items-center">
-			<ul class="flex gap-x-8">
-				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer">Archive</a></li>
-				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer">Github</a></li>
-				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer">Discord</a></li>
+			<ul class="grid md:grid-cols-3 sm:flex gap-x-8">
+				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer overflow-hidden text-nowrap">Archive</a></li>
+				<li>» <a href="https://github.com/japanware" target="_blank" class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer overflow-hidden text-nowrap">Github</a></li>
+				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer overflow-hidden text-nowrap">Discord</a></li>
 			</ul>
 		</div>
 	</div>
 </Layout>
+
+<script>
+	// JavaScript to dynamically generate dots between the title and author
+	document.querySelectorAll('.dots').forEach(span => {
+		const parentWidth = span.parentElement.clientWidth;
+		const titleWidth = span.previousElementSibling.offsetWidth;
+		const authorWidth = span.nextElementSibling.offsetWidth;
+		const dotsCount = Math.floor((parentWidth - titleWidth - authorWidth) / 8.25); // 8px per dot
+		span.textContent = '.'.repeat(dotsCount);
+	});
+</script>
