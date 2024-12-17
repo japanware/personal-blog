@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Unifont';
+    src: url('../assets/fonts/unifont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gohu';
+    src: url('../assets/fonts/gohu.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Unifont', sans-serif; /* Set Unifont as the default font */
+}

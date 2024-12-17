@@ -1,5 +1,4 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -7,5 +6,27 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<div class="text-center">
+		<pre class="flex justify-center text-center leading-none">
+ ▐▄▄▄ ▄▄▄·  ▄▄▄· ▄▄▄·  ▐ ▄ ▄▄▌ ▐ ▄▌ ▄▄▄· ▄▄▄  ▄▄▄ .
+  ·██▐█ ▀█ ▐█ ▄█▐█ ▀█ •█▌▐███· █▌▐█▐█ ▀█ ▀▄ █·▀▄.▀·
+▪▄ ██▄█▀▀█  ██▀·▄█▀▀█ ▐█▐▐▌██▪▐█▐▐▌▄█▀▀█ ▐▀▀▄ ▐▀▀▪▄
+▐▌▐█▌▐█ ▪▐▌▐█▪·•▐█ ▪▐▌██▐█▌▐█▌██▐█▌▐█ ▪▐▌▐█•█▌▐█▄▄▌
+ ▀▀▀• ▀  ▀ .▀    ▀  ▀ ▀▀ █▪ ▀▀▀▀ ▀▪ ▀  ▀ .▀  ▀ ▀▀▀
+		</pre>
+		<p class="mb-12">C/++ Crackhead</p>
+		<div class="flex flex-col max-w-96 m-auto items-center border-4 border-double p-2 mb-12 border-[#cdd6f4]">
+			<h5 class="flex justify-between">Latest Posts:</h5>
+			<ul>
+				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer">001 - Hello World</a></li>
+			</ul>
+		</div>
+		<div class="flex flex-col max-w-96 m-auto items-center">
+			<ul class="flex gap-x-8">
+				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer">Archive</a></li>
+				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer">Github</a></li>
+				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer">Discord</a></li>
+			</ul>
+		</div>
+	</div>
 </Layout>
