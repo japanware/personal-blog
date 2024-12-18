@@ -1,7 +1,7 @@
 ---
 layout: ../../layouts/MarkdownPostLayout.astro
 title: ' Resources for Reversing, Maldev and more '
-pubDate: 2022-07-01
+pubDate: 2024-10-01
 author: 'japanware'
 ---
 

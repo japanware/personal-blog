@@ -1,17 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
-const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }));
+import GlobalLogo from "../components/GlobalLogo.astro";
+import HomeFooter from "../components/HomeFooter.astro";
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }))
+	.sort((a: any, b: any) => {
+		const dateA = new Date(a.frontmatter.pubDate);
+		const dateB = new Date(b.frontmatter.pubDate);
+		return dateB - dateA; // Sort descending (newest first)
+	})
+	.slice(0, 5);
 ---
 
 <Layout>
 	<div class="mb-12 mt-32 text-center">
-		<pre class="flex justify-center text-center leading-none overflow-hidden text-nowrap">
- ▐▄▄▄ ▄▄▄·  ▄▄▄· ▄▄▄·  ▐ ▄ ▄▄▌ ▐ ▄▌ ▄▄▄· ▄▄▄  ▄▄▄ .
-  ·██▐█ ▀█ ▐█ ▄█▐█ ▀█ •█▌▐███· █▌▐█▐█ ▀█ ▀▄ █·▀▄.▀·
-▪▄ ██▄█▀▀█  ██▀·▄█▀▀█ ▐█▐▐▌██▪▐█▐▐▌▄█▀▀█ ▐▀▀▄ ▐▀▀▪▄
-▐▌▐█▌▐█ ▪▐▌▐█▪·•▐█ ▪▐▌██▐█▌▐█▌██▐█▌▐█ ▪▐▌▐█•█▌▐█▄▄▌
- ▀▀▀• ▀  ▀ .▀    ▀  ▀ ▀▀ █▪ ▀▀▀▀ ▀▪ ▀  ▀ .▀  ▀ ▀▀▀
-		</pre>
+		<GlobalLogo/>
 		<p class="mb-12">C/++ Crackhead</p>
 		<div class="flex flex-col max-w-[32rem] m-auto items-center border-4 border-double p-2 mb-12 border-[#cdd6f4]">
 			<h5 class="flex justify-between">Latest Posts:</h5>
@@ -27,13 +29,7 @@ const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true })
 				)}
 			</ul>
 		</div>
-		<div class="flex flex-col max-w-96 m-auto items-center">
-			<ul class="grid md:grid-cols-3 sm:flex gap-x-8">
-				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer overflow-hidden text-nowrap">Archive</a></li>
-				<li>» <a href="https://github.com/japanware" target="_blank" class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer overflow-hidden text-nowrap">Github</a></li>
-				<li>» <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer overflow-hidden text-nowrap">Discord</a></li>
-			</ul>
-		</div>
+		<HomeFooter/>
 	</div>
 </Layout>
 

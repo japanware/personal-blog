@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import GlobalLogo from "../components/GlobalLogo.astro";
+import HomeFooter from "../components/HomeFooter.astro";
+const allPosts = Object.values(import.meta.glob('./posts/*.md', { eager: true }))
+    .sort((a: any, b: any) => {
+        const dateA = new Date(a.frontmatter.pubDate);
+        const dateB = new Date(b.frontmatter.pubDate);
+        return dateB - dateA; // Sort descending (newest first)
+    });
+---
+
+<Layout>
+    <div class="mb-12 mt-32 text-center">
+        <GlobalLogo/>
+        <p class="mb-12">C/++ Crackhead</p>
+        <div class="flex m-auto text-left float left max-w-[32rem]">
+            <a href="../" class="flex w-max text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer mb-4">« Back<br/><br/></a>
+        </div>
+        <div class="flex flex-col max-w-[32rem] m-auto items-center border-4 border-double p-2 mb-12 border-[#cdd6f4]">
+            <h5 class="flex justify-between">Archived Posts:</h5>
+            <ul class="w-full">
+                {allPosts.map((post: any) =>
+                        <li class="flex w-full items-center">
+                            <a class="text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer overflow-hidden text-nowrap" href={post.url}>
+                                {post.frontmatter.title}
+                            </a>
+                            <span class="dots overflow-hidden text-nowrap flex-grow"></span>
+                            <p class="flex">{post.frontmatter.author}</p>
+                        </li>
+                )}
+            </ul>
+        </div>
+    </div>
+</Layout>
+
+<script>
+    // JavaScript to dynamically generate dots between the title and author
+    document.querySelectorAll('.dots').forEach(span => {
+        const parentWidth = span.parentElement.clientWidth;
+        const titleWidth = span.previousElementSibling.offsetWidth;
+        const authorWidth = span.nextElementSibling.offsetWidth;
+        const dotsCount = Math.floor((parentWidth - titleWidth - authorWidth) / 8.25); // 8px per dot
+        span.textContent = '.'.repeat(dotsCount);
+    });
+</script>
