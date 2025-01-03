@@ -19,11 +19,11 @@ const { frontmatter } = Astro.props;
     "
         >
             <a href="../../" class="flex w-max text-[#cba6f7] decoration-dotted hover:underline hover:cursor-pointer mb-4">« Back<br/><br/></a>
-            <p class="font-bold">{frontmatter.title}</p>
+            <h1 class="font-bold">{frontmatter.title}</h1>
             <article class="">
                 <slot />
             </article>
-            <p>~ {frontmatter.author}</p>
+            <p>~{frontmatter.author}</p>
         </div>
     </div>
 </Layout>
